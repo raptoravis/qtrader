@@ -48,11 +48,19 @@ class BarEventEngineRecorder:
         assert "datetime" in vars, "`datetime` is not in the recorder!"
         assert "portfolio_value" in vars, "`portfolio_value` is not in the recorder!"
         if path is None:
-            path = "results"
+            path = "./results"
         if path not in os.listdir():
-            os.mkdir(path)
+            if not(os.path.exists(path) and os.path.isdir(path)):
+                os.mkdir(path)
         now = datetime.now()
-        os.mkdir(f"{path}/{now}")
+
+        resultsNow = f"{path}/{now}"
+
+        # replace invalid char with '-'
+        resultsNow = resultsNow.replace(' ', '-')
+        resultsNow = resultsNow.replace(':', '-')
+
+        os.mkdir(resultsNow)
 
         dt = getattr(self, "datetime")
         pv = getattr(self, "portfolio_value")
@@ -76,7 +84,7 @@ class BarEventEngineRecorder:
                             df.loc[idx, var] = df.loc[idx, var] + "; " + v[i][1]
                 else:
                     df.iloc[len(dt)-1, df.columns.get_loc(var)] = str(v)
-        df.to_csv(f"{path}/{now}/result.csv", index=False)
+        df.to_csv(f"{resultsNow}/result.csv", index=False)
 
 
 
