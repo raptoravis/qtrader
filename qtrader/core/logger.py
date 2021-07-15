@@ -17,6 +17,11 @@ logger.setLevel(logging.DEBUG)  # Log等级总开关
 if "log" not in os.listdir():
     os.mkdir(os.path.join(os.getcwd(),"log"))
 logfile = f'./log/{datetime.now()}.txt'
+
+# replace invalid char with '-'
+logfile = logfile.replace(' ', '-')
+logfile = logfile.replace(':', '-')
+
 fh = logging.FileHandler(logfile, mode='a')
 fh.setLevel(logging.DEBUG)  # 输出到file的log等级的开关
 
