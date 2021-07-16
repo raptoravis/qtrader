@@ -65,9 +65,12 @@ class DemoStrategy(BaseStrategy):
             self.engine.log.info(orderbook)
             self.engine.log.info(data)
 
-            if isinstance(data, dict): price = data["k1m"].close
-            elif isinstance(data, Bar): price = data.close
-            else: raise ValueError(f"data不是合法的格式！")
+            if quote:
+                price=quote.last_price
+            else:
+                if isinstance(data, dict): price = data["k1m"].close
+                elif isinstance(data, Bar): price = data.close
+                else: raise ValueError(f"data不是合法的格式！")
 
             order_instruct = dict(
                 security=security,

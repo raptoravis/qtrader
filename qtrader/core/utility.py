@@ -135,6 +135,12 @@ def get_kline_dfield_from_seconds(time_step:int)->str:
         assert time_step == 3600*24, f"Given timestep can not exceed 3600*24 seconds, but {time_step} was given."
         return f"k1d"
 
+def normalizefilePath(filePath:str)->str:
+    # replace invalid char with '-'
+    filePath = filePath.replace(' ', '-')
+    filePath = filePath.replace(':', '-')
+    return filePath
+
 if __name__=="__main__":
     blockdict = BlockingDict()
     blockdict.put(1, "a")

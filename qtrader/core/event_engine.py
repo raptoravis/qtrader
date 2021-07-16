@@ -13,7 +13,7 @@ import pandas as pd
 
 from qtrader.core.constants import TradeMode
 from qtrader.core.strategy import BaseStrategy
-from qtrader.core.utility import timeit, get_kline_dfield_from_seconds
+from qtrader.core.utility import timeit, get_kline_dfield_from_seconds,normalizefilePath
 
 
 class BarEventEngineRecorder:
@@ -55,10 +55,7 @@ class BarEventEngineRecorder:
         now = datetime.now()
 
         resultsNow = f"{path}/{now}"
-
-        # replace invalid char with '-'
-        resultsNow = resultsNow.replace(' ', '-')
-        resultsNow = resultsNow.replace(':', '-')
+        resultsNow = normalizefilePath(resultsNow)
 
         os.mkdir(resultsNow)
 

@@ -8,6 +8,7 @@
 import os
 from datetime import datetime
 import logging
+from qtrader.core.utility import normalizefilePath
 
 # 第一步，创建一个logger
 logger = logging.getLogger()
@@ -17,10 +18,7 @@ logger.setLevel(logging.DEBUG)  # Log等级总开关
 if "log" not in os.listdir():
     os.mkdir(os.path.join(os.getcwd(),"log"))
 logfile = f'./log/{datetime.now()}.txt'
-
-# replace invalid char with '-'
-logfile = logfile.replace(' ', '-')
-logfile = logfile.replace(':', '-')
+logfile = normalizefilePath(logfile)
 
 fh = logging.FileHandler(logfile, mode='a')
 fh.setLevel(logging.DEBUG)  # 输出到file的log等级的开关
