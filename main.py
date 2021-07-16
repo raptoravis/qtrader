@@ -18,7 +18,8 @@ from examples.demo_strategy import DemoStrategy
 if __name__=="__main__":
 
     stock_list = [
-        Stock(code="HK.01157", lot_size=200, stock_name="中联重科"),
+        # Stock(code="HK.01157", lot_size=200, stock_name="中联重科"),
+        Stock(code="HK.00700", lot_size=200, stock_name="腾讯科技"),
     ]
 
     market = BacktestGateway(

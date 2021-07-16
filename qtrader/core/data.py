@@ -169,12 +169,15 @@ def _get_data(security:Stock,
     """
     # 该证券的所有历史数据文件（以日期为单位）
     data_files = _get_data_files(security, dfield)
+
     # 提取在指定时间段内的数据文件
     data_files_in_range = []
     for data_file in data_files:
-        dt = datetime.strptime(data_file[-14:].replace(".csv",""), "%Y-%m-%d").date()
-        if start.date()<=dt<=end.date():
-            data_files_in_range.append(data_file)
+        # dt = datetime.strptime(data_file[-14:].replace(".csv",""), "%Y-%m-%d").date()
+        # if start.date()<=dt<=end.date():
+        #     data_files_in_range.append(data_file)
+        data_files_in_range.append(data_file)
+
     # 合并指定时间段内的历史数据
     full_data = pd.DataFrame()
     for data_file in data_files_in_range:
